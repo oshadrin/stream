@@ -27,7 +27,7 @@ public class EmployeeService {
         if (!StringUtils.isAlpha(employee.getFirstName()) || !StringUtils.isAlpha(employee.getLastName())){
         throw new EmployeeInvalidDataException();
         }
-        if (employees.containsKey(employee.getFullName())) {
+        if (employees.containsKey(createKey(employee))) {
             throw new EmployeeAlreadyAddedException("Сотрудник уже существует");
         }
         if (employees.size() >= MAX_SIZE) {
