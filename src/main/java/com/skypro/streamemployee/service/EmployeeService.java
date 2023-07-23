@@ -39,20 +39,17 @@ public class EmployeeService {
     }
 
     public Employee removeEmployee(String firstName, String lastName) {
-        Employee employee = employees.get(createKey(firstName, lastName));
-        if (!employees.containsKey(employee.getFullName())) {
+        if (!employees.containsKey(createKey(firstName, lastName))) {
             throw new EmployeeNotFoundException("Сотрудник не найден");
         }
-        return employees.remove(employee.getFullName());
+        return employees.remove(createKey(firstName, lastName));
     }
 
-
     public Employee findEmployee(String firstName, String lastName) {
-        Employee employee = employees.get(createKey(firstName, lastName));
-        if (!employees.containsKey(employee.getFullName())) {
+        if (!employees.containsKey(createKey(firstName, lastName))) {
             throw new EmployeeNotFoundException("Сотрудник не найден");
         }
-        return employees.get(employee.getFullName());
+        return employees.get(createKey(firstName, lastName));
     }
 
     private static String createKey(Employee employee) {
