@@ -29,7 +29,8 @@ public class DepartmentService {
         return employeeService.getAll().stream()
                 .filter(e -> e.getDepartment() == dep)
                 .mapToDouble(Employee::getSalary)
-                .sum();
+                .max()
+                .orElseThrow();
     }
     public double getMinSalary(int dep) {
         return employeeService.getAll().stream()
@@ -47,6 +48,4 @@ public class DepartmentService {
         return employeeService.getAll().stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }
-
-
 }
