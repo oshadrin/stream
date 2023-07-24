@@ -19,7 +19,7 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/sum")
     public double getSalarySumByDepartment(@RequestParam("/sum") Integer dep){
         return departmentService.getSalarySumByDepartment(dep);
     }

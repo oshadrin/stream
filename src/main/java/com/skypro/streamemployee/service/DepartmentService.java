@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,15 +31,16 @@ public class DepartmentService {
                 .filter(e -> e.getDepartment() == dep)
                 .mapToDouble(Employee::getSalary)
                 .max()
-                .orElseThrow();
+                .orElseThrow(() -> new EmployeeNotFoundException("Сотрудник не найден"));
     }
     public double getMinSalary(int dep) {
         return employeeService.getAll().stream()
                 .filter(e -> e.getDepartment() == dep)
                 .mapToDouble(Employee::getSalary)
                 .min()
-                .orElseThrow();
+                .orElseThrow(() -> new EmployeeNotFoundException("Сотрудник не найден"));
     }
+
     public List<Employee> getAll(int dep){
         return employeeService.getAll().stream()
                 .filter(employee -> employee.getDepartment() == dep)
