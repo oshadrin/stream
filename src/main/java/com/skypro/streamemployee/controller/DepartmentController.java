@@ -2,16 +2,13 @@ package com.skypro.streamemployee.controller;
 
 import com.skypro.streamemployee.model.Employee;
 import com.skypro.streamemployee.service.DepartmentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping("/department")
 public class DepartmentController {
     private final DepartmentService departmentService;
 
@@ -19,27 +16,27 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping(path = "/sum")
-    public double getSalarySumByDepartment(@RequestParam("/sum") Integer dep){
-        return departmentService.getSalarySumByDepartment(dep);
+    @GetMapping(value = "/{id}/salary/sum")
+    public double getSalarySumByDepartment(@PathVariable int id){
+        return departmentService.getSalarySumByDepartment(id);
     }
 
-    @GetMapping(path = "/max-salary")
-    public double getMaxSalary(@RequestParam("/departmentID") Integer dep){
-        return departmentService.getMaxSalary(dep);
+    @GetMapping(value = "/{id}/salary/max")
+    public double getMaxSalary(@PathVariable int id){
+        return departmentService.getMaxSalary(id);
     }
 
-    @GetMapping(path = "/min-salary")
-    public double getMinSalary(@RequestParam("/departmentID") Integer dep){
-        return departmentService.getMinSalary(dep);
+    @GetMapping(value =  "/{id}/salary/min")
+    public double getMinSalary(@PathVariable int id){
+        return departmentService.getMinSalary(id);
     }
 
-    @GetMapping(value = "all", params = "departmentId")
-    public List<Employee> getAll(@RequestParam("departmentId") int dep) {
-        return departmentService.getAll((dep));
+    @GetMapping(value = "/{id}/employees")
+    public List<Employee> getAll(@PathVariable int id) {
+        return departmentService.getAll((id));
     }
 
-    @GetMapping("/all")
+    @GetMapping(value = "/employees")
     public Map<Integer, List<Employee>> getAll() {
         return departmentService.getAll();
     }
